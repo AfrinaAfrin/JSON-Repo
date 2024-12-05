@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Theme Selector</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 20px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .theme-selector {
+      margin-bottom: 20px;
+    }
+    label {
+      font-size: 18px;
+    }
+    select {
+      padding: 5px 10px;
+      font-size: 16px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="theme-selector">
+    <label for="theme">Select Theme:</label>
+    <select id="theme" onchange="applyTheme()">
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+      <option value="blue">Blue</option>
+    </select>
+  </div>
+  <h1>Welcome to the Dynamic Theme Selector!</h1>
+  <p>Use the dropdown above to change the theme of this page.</p>
+
+  <script>
+     
+    function applyTheme() {
+      const theme = document.getElementById("theme").value;
+
+      
+      sessionStorage.setItem("selectedTheme", theme);
+
+      
+      updateTheme(theme);
+    }
+
+    
+    function updateTheme(theme) {
+      const body = document.body;
+
+      if (theme === "light") {
+        body.style.backgroundColor = "#ffffff";
+        body.style.color = "#000000";
+      } else if (theme === "dark") {
+        body.style.backgroundColor = "#121212";
+        body.style.color = "#ffffff";
+      } else if (theme === "blue") {
+        body.style.backgroundColor = "#001f3f";
+        body.style.color = "#ffffff";
+      }
+    }
+
+     
+    window.onload = function () {
+      const savedTheme = sessionStorage.getItem("selectedTheme") || "light";  
+      document.getElementById("theme").value = savedTheme;
+      updateTheme(savedTheme);
+    };
+  </script>
+</body>
+</html>
